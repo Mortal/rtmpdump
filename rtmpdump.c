@@ -1040,6 +1040,7 @@ main(int argc, char **argv)
 	case 'C': {
 	  AVal av;
 	  STR2AVAL(av, optarg);
+	  RTMP_LogPrintf("Invoking RTMP_SetOpt\n");
 	  if (!RTMP_SetOpt(&rtmp, &av_conn, &av))
 	    {
 	      RTMP_Log(RTMP_LOGERROR, "Invalid AMF parameter: %s", optarg);

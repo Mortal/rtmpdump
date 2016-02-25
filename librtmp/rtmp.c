@@ -623,6 +623,7 @@ parseAMF(AMFObject *obj, AVal *av, int *depth)
   AMFObjectProperty prop = {{0,0}};
   int i;
   char *p, *arg = av->av_val;
+  RTMP_Log(RTMP_LOGERROR, "In parseAMF");
 
   if (arg[1] == ':')
     {
@@ -650,14 +651,17 @@ parseAMF(AMFObject *obj, AVal *av, int *depth)
 	  if (i == 2)
 	    {
 	      prop.p_type = AMF_ECMA_ARRAY;
+	      RTMP_Log(RTMP_LOGERROR, "Creating an ECMA array");
 	    }
 	  else if (i)
 	    {
 	      prop.p_type = AMF_OBJECT;
+	      RTMP_Log(RTMP_LOGERROR, "Creating an object");
 	    }
 	  else
 	    {
 	      (*depth)--;
+	      RTMP_Log(RTMP_LOGERROR, "Ending an object, now at %d", *depth);
 	      return 0;
 	    }
 	  break;
@@ -702,6 +706,7 @@ parseAMF(AMFObject *obj, AVal *av, int *depth)
   if (*depth)
     {
       AMFObject *o2;
+      RTMP_Log(RTMP_LOGERROR, "Add property at depth %d", *depth);
       for (i=0; i<*depth; i++)
 	{
 	  o2 = &obj->o_props[obj->o_num-1].p_vu.p_object;
@@ -710,12 +715,17 @@ parseAMF(AMFObject *obj, AVal *av, int *depth)
     }
   AMF_AddProp(obj, &prop);
   if (prop.p_type == AMF_OBJECT || prop.p_type == AMF_ECMA_ARRAY)
-    (*depth)++;
+    {
+      (*depth)++;
+      RTMP_Log(RTMP_LOGERROR, "Increasing depth, now at %d", *depth);
+    }
   return 0;
 }
 
 int RTMP_SetOpt(RTMP *r, const AVal *opt, AVal *arg)
 {
+  RTMP_LogPrintf("In RTMP_SetOpt\n");
+  RTMP_Log(RTMP_LOGERROR, "In RTMP_SetOpt");
   int i;
   void *v;
 
@@ -743,6 +753,7 @@ int RTMP_SetOpt(RTMP *r, const AVal *opt, AVal *arg)
       }
       break;
     case OPT_CONN:
+      RTMP_Log(RTMP_LOGERROR, "Handling OPT_CONN");
       if (parseAMF(&r->Link.extras, arg, &r->Link.edepth))
         return FALSE;
       break;
