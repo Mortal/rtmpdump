@@ -817,6 +817,7 @@ main(int argc, char **argv)
   /* sleep(30); */
 
   RTMP_Init(&rtmp);
+  rtmp.m_fEncoding = 3.0;
 
   int opt;
   struct option longopts[] = {
