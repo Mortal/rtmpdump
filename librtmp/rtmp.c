@@ -1634,7 +1634,7 @@ SendConnectPacket(RTMP *r, RTMPPacket *cp)
       enc = AMF_EncodeNamedBoolean(enc, pend, &av_fpad, FALSE);
       if (!enc)
 	return FALSE;
-      enc = AMF_EncodeNamedNumber(enc, pend, &av_capabilities, 15.0);
+      enc = AMF_EncodeNamedNumber(enc, pend, &av_capabilities, 239.0);
       if (!enc)
 	return FALSE;
       enc = AMF_EncodeNamedNumber(enc, pend, &av_audioCodecs, r->m_fAudioCodecs);
