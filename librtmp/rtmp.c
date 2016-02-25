@@ -341,7 +341,7 @@ RTMP_Init(RTMP *r)
   r->m_nClientBW = 2500000;
   r->m_nClientBW2 = 2;
   r->m_nServerBW = 2500000;
-  r->m_fAudioCodecs = 3191.0;
+  r->m_fAudioCodecs = 3575.0;
   r->m_fVideoCodecs = 252.0;
   r->Link.timeout = 30;
   r->Link.swfAge = 30;
