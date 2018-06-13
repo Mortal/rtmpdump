@@ -8,9 +8,9 @@ LD=$(CROSS_COMPILE)ld
 SYS=posix
 #SYS=mingw
 
-CRYPTO=OPENSSL
+#CRYPTO=OPENSSL
 #CRYPTO=POLARSSL
-#CRYPTO=GNUTLS
+CRYPTO=GNUTLS
 LIBZ=-lz
 LIB_GNUTLS=-lgnutls -lhogweed -lnettle -lgmp $(LIBZ)
 LIB_OPENSSL=-lssl -lcrypto $(LIBZ)
